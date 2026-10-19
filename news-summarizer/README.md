@@ -13,6 +13,36 @@ News API --> article text --(OpenAI)--> summary --(Cohere)--> sentiment
 
 Cohere never sees the original article, only OpenAI's summary.
 
+> **Provider change from the lab text:** the original lab names **Anthropic** as the second provider. Our class uses **Cohere** instead (`intro.md` says to read Cohere wherever the lab says Anthropic). So this project uses `cohere`, `COHERE_API_KEY` and the model `command-r-08-2024`, and there is no `anthropic` package or `ANTHROPIC_API_KEY`. This is intentional, not a missing requirement.
+
+## Reviewer start here
+
+Start with [`lab_proof.md`](lab_proof.md). It holds the four required items
+and links everything else:
+
+| Required item | Where |
+|---|---|
+| Configuration | [`lab_proof.md` section 1](lab_proof.md#1-configuration) and [`.env.example`](.env.example) |
+| Input payload (raw News API article) | [`lab_proof.md` section 2](lab_proof.md#2-input-payload) |
+| Execution trace (providers, fallback, retries) | [`lab_proof.md` section 3](lab_proof.md#3-execution-trace) and [`evidence/usage_log_sample.jsonl`](evidence/usage_log_sample.jsonl) |
+| Output record (title, summary, sentiment, cost) | [`lab_proof.md` section 4](lab_proof.md#4-output-record) |
+| Reflection | [`lab_summary.md`](lab_summary.md) and [`lab_proof.md` section 5](lab_proof.md#5-explain) |
+| Screenshots | [`evidence/`](evidence/) |
+
+To re-run it yourself (no real keys are in the repo, so you need your own
+three in `.env`; the tests need none):
+
+```bash
+cd news-summarizer
+pip install -r requirements.txt
+pytest test_summarizer.py -v                       # 49 tests, no network, no keys
+cp .env.example .env                               # paste your own keys
+python config.py                                   # checkpoint 1
+python main.py --category technology --count 3     # full app
+OPENAI_API_KEY=sk-invalid python main.py --category technology --count 1   # fallback demo
+```
+
+
 ## Files
 
 | File | Job |

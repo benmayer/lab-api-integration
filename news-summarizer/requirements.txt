@@ -1,5 +1,5 @@
 openai>=1.12.0
-cohere>=5.0.0
+cohere>=5.0.0  # replaces anthropic from the original lab text (class uses Cohere)
 requests>=2.31.0
 python-dotenv>=1.0.0
 aiohttp>=3.9.0

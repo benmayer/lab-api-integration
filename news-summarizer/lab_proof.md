@@ -4,6 +4,14 @@ This is the reviewer's entry point. It shows one article going through the
 whole workflow: News API, then OpenAI (summary), then Cohere (sentiment), with
 a second run where OpenAI fails and Cohere takes over.
 
+> **Provider change from the lab text:** the original lab names **Anthropic** as the second provider. Our class uses **Cohere** instead (`intro.md` says to read Cohere wherever the lab says Anthropic). So this project uses `cohere`, `COHERE_API_KEY` and the model `command-r-08-2024`, and there is no `anthropic` package or `ANTHROPIC_API_KEY`. This is intentional, not a missing requirement.
+
+**Evidence index:** [1 Configuration](#1-configuration) ·
+[2 Input payload](#2-input-payload) · [3 Execution trace](#3-execution-trace) ·
+[4 Output record](#4-output-record) · [5 Explain](#5-explain) ·
+[README](README.md) · [lab_summary.md](lab_summary.md) ·
+[evidence/ (screenshots and call log)](evidence/)
+
 Workflow: `trigger -> transform -> action`
 
 - **Trigger:** `python main.py --category technology --count N`
