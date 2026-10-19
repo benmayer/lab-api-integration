@@ -24,6 +24,7 @@ Cohere never sees the original article, only OpenAI's summary.
 | `main.py` | Interactive app and one-shot command line |
 | `test_summarizer.py` | 49 unit tests, all with fakes (no network, no cost) |
 | `usage_log.jsonl` | Created at run time: one line per LLM call (git-ignored) |
+| `evidence/` | Screenshots and `usage_log_sample.jsonl`, a frozen copy of the call log from the development runs |
 
 ## Setup
 
@@ -87,11 +88,11 @@ Cost summary:
 ```
 
 Screenshots of a full run and of the passing tests are in
-[`screenshots/`](screenshots/):
+[`evidence/`](evidence/):
 
-![Config check](screenshots/config%20setup.png)
-![Tests passing](screenshots/pytest%20passes.png)
-![Main app run, 3 articles](screenshots/main%20run.png)
+![Config check](evidence/config%20setup.png)
+![Tests passing](evidence/pytest%20passes.png)
+![Main app run, 3 articles](evidence/main%20run.png)
 
 ## Cost analysis
 
@@ -102,7 +103,9 @@ Prices (USD per million tokens, checked 2026-10-19 on each provider's docs):
 | OpenAI `gpt-4o-mini` | $0.15 | $0.60 |
 | Cohere `command-r-08-2024` | $0.15 | $0.60 |
 
-Measured from the 29 calls logged on 2026-10-19 (`usage_log.jsonl`):
+Measured from the first 29 calls logged on 2026-10-19, lines 1 to 29 of
+[`evidence/usage_log_sample.jsonl`](evidence/usage_log_sample.jsonl) (the file
+holds 35 calls, because the last screenshot run was added afterwards):
 
 | | Calls | Avg input tokens | Avg output tokens | Avg cost per call |
 |---|---|---|---|---|
@@ -158,7 +161,7 @@ Measured from the 29 calls logged on 2026-10-19 (`usage_log.jsonl`):
 
 - News API sometimes returns fewer articles than requested even when it reports
   more matches (for example 2 of 3 for `science`, see the
-  [screenshot](screenshots/main%20run%20-%202%20API%20responses%20instead%20of%203.png)).
+  [screenshot](evidence/main%20run%20-%202%20API%20responses%20instead%20of%203.png)).
   The app prints a note when this happens.
 - News API categories are loose, so a `technology` headline may not be about
   technology.

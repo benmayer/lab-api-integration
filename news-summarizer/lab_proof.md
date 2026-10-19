@@ -26,7 +26,7 @@ REQUEST_TIMEOUT=30
 DAILY_BUDGET=5.00
 ```
 
-![Config check](screenshots/config%20setup.png)
+![Config check](evidence/config%20setup.png)
 
 Models: `gpt-4o-mini` (OpenAI) and `command-r-08-2024` (Cohere), both at $0.15
 per million input tokens and $0.60 per million output tokens (checked
@@ -145,8 +145,10 @@ Cohere, and the summary call is flagged `used_fallback: true`.
 ### The call log behind both runs (`usage_log.jsonl`)
 
 One line is appended for every successful call. These are the lines written by
-Runs A and B, in order. The first two are article 1 of Run A, the seventh is
-the fallback summary of Run B:
+Runs A and B, in order (lines 22 to 29 of the full log, which is committed as
+[`evidence/usage_log_sample.jsonl`](evidence/usage_log_sample.jsonl); the live
+`usage_log.jsonl` is git-ignored). The first two are article 1 of Run A, the
+seventh is the fallback summary of Run B:
 
 ```json
 {"time": "2026-10-19T18:18:33+02:00", "provider": "openai", "model": "gpt-4o-mini", "input_tokens": 193, "output_tokens": 45, "cost": 5.5950000000000005e-05, "used_fallback": false}
@@ -166,13 +168,13 @@ could not trigger on demand with the live APIs. They are covered by unit tests
 with simulated failures instead (`test_ask_retries_transient_error_then_succeeds`,
 `test_ask_gives_up_after_max_retries`, `test_news_api_retries_server_error_then_succeeds`).
 
-![49 tests passing](screenshots/pytest%20passes.png)
+![49 tests passing](evidence/pytest%20passes.png)
 
 Screenshot of a separate 3-article `technology` run made after Run A (the
 model wording and cost totals differ slightly from the text above, because
 each run asks the models again):
 
-![Main app run](screenshots/main%20run.png)
+![Main app run](evidence/main%20run.png)
 
 ## 4. Output record
 
