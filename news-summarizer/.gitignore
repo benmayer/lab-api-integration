@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.pytest_cache/
+usage_log.jsonl
